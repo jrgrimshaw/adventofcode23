@@ -1,8 +1,6 @@
 def read_file():
   with open('input.txt', encoding="utf-8") as f:
     return f.read()
-  
-destinations = []
 
 def main():
   input = read_file()
@@ -13,10 +11,11 @@ def main():
   for i in range(len(sections) - 1):
     maps = create_maps(sections[i + 1])
     new_seed_ranges = []
+
     for seed_range in seed_ranges:
       new_seed_ranges += destination_from_source(maps, seed_range)
+    
     seed_ranges = new_seed_ranges
-    # print('section', i, new_seed_ranges)
 
   print(min(min(seed_ranges)))
 
@@ -25,8 +24,8 @@ def destination_from_source(maps, seed_range):
 
   def search(range):
     start, end = range
-   
     destination = False
+    
     for map in maps:
       if start >= map[0][0] and start <= map[0][1] and end >= map[0][0] and end <= map[0][1]:
         diff = [start - map[0][0], end - map[0][0]]
